@@ -29,9 +29,11 @@
 #include "Options/Output/MotionRequest/WalkToTarget.h"
 
 #include "Options/Output/PlaySound.h"
+#include "Options/Roles/PenaltyKeeper.h"
 
 #include "Options/Roles/Striker.h"
-
+#include "Options/Roles/PenaltyKeeper.h"
+#include "Options/Roles/PenaltyKicker.h"
 #include "Options/Skills/ArmContact.h"
 #include "Options/Skills/GetUp.h"
 

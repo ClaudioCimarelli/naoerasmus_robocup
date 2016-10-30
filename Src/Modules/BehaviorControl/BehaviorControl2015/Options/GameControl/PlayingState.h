@@ -4,7 +4,9 @@ option(PlayingState)
   {
     action
     {
-      Striker();
+    	//TODO: implement role selection
+    	//we have only penalty keeper role active
+      PenaltyKeeper();
     }
   }
 }
