@@ -14,7 +14,7 @@ option(PenaltyKeeper) {
 
 	state(detectShot){
 
-
+		SpecialAction(SpecialActionRequest::sitDown);
 
 	}
 
