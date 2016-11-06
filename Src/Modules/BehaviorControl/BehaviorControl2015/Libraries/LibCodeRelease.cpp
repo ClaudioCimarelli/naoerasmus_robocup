@@ -9,12 +9,15 @@ namespace Behavior2015
   #include "LibCodeRelease.h"
   
   LibCodeRelease::LibCodeRelease():
-    angleToGoal(0.f)
+    angleToGoal(0.f),
+  	angleToOwnGoal(0.f)
+
   {}
   
   void LibCodeRelease::preProcess()
   {
     angleToGoal = (theRobotPose.inverse() * Vector2f(theFieldDimensions.xPosOpponentGroundline, 0.f)).angle();
+    angleToOwnGoal = (theRobotPose.inverse() * Vector2f(theFieldDimensions.xPosOwnGroundline, 0.f)).angle();
   }
 
   void LibCodeRelease::postProcess()

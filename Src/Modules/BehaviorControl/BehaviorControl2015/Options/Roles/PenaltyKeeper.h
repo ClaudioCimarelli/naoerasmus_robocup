@@ -13,12 +13,22 @@ option(PenaltyKeeper) {
 	}
 
 	state(detectShot){
+		transition
+			{
+			  if(state_time > 1000)
+				goto saveShot;
+			}
+			action
+			{
+			  theHeadControlMode = HeadControl::lookForward;
 
-		SpecialAction(SpecialActionRequest::sitDown);
+			}
 
 	}
 
 	state(saveShot){
+
+		SpecialAction(SpecialActionRequest::sitDown);
 
 	}
 }

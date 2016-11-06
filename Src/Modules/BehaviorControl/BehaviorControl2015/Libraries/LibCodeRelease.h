@@ -16,7 +16,7 @@ public:
   bool between(float value, float min, float max);
     
   int timeSinceBallWasSeen();
-  
  
   float angleToGoal;
+  float angleToOwnGoal;
 };
