@@ -18,5 +18,5 @@ public:
   int timeSinceBallWasSeen();
  
   float angleToGoal;
-  float angleToOwnGoal;
+  float distanceToOwnGoal;
 };

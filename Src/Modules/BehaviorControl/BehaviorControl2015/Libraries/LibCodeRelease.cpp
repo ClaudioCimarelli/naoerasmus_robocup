@@ -3,6 +3,7 @@
 */
 
 #include "../LibraryBase.h"
+#include "../../Util/Eigen/Eigen/src/Core/util/ForwardDeclarations.h"
 
 namespace Behavior2015
 {
@@ -10,14 +11,14 @@ namespace Behavior2015
   
   LibCodeRelease::LibCodeRelease():
     angleToGoal(0.f),
-  	angleToOwnGoal(0.f)
+  	distanceToOwnGoal(0.f)
 
   {}
   
   void LibCodeRelease::preProcess()
   {
     angleToGoal = (theRobotPose.inverse() * Vector2f(theFieldDimensions.xPosOpponentGroundline, 0.f)).angle();
-    angleToOwnGoal = (theRobotPose.inverse() * Vector2f(theFieldDimensions.xPosOwnGroundline, 0.f)).angle();
+    distanceToOwnGoal = theRobotPose.translation.x() - theFieldDimensions.xPosOwnGroundline;
   }
 
   void LibCodeRelease::postProcess()
