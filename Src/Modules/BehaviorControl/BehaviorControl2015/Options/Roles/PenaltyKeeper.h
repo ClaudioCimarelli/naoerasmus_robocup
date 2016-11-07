@@ -1,5 +1,5 @@
 option(PenaltyKeeper) {
-	float shootAngle = 0.f;
+	float shootAngle = 5_deg;
 
 	initial_state(start) {
 		transition
@@ -17,7 +17,7 @@ option(PenaltyKeeper) {
 	state(detectShot){
 		transition
 			{
-			  if(action_done)
+			  if(state_time>1000)
 				goto saveShot;
 			}
 			action
@@ -26,19 +26,30 @@ option(PenaltyKeeper) {
 			  shootAngle = 0_deg;
 			  //TODO:detect ball movement
 			  //save direction and send to saveshot
-
 			}
 
 	}
 
 	state(saveShot){
-		if(shootAngle<3_deg && shootAngle>-3_deg)
+		transition{
+			if(state_time > 3000 || (state_time > 10 && action_done)){
+				goto wait;
+			}
+		}
+		action{
+		if(std::abs(shootAngle)<3_deg)
 			SpecialAction(SpecialActionRequest::sitDown);
 		else if (shootAngle>=3_deg)
-			SpecialAction(SpecialActionRequest::sitDown);
+			SpecialAction(SpecialActionRequest::fallLeft);
 		else
 			SpecialAction(SpecialActionRequest::sitDown);
-
-
+		}
 	}
+
+	 state(wait){
+		  action{
+			  theHeadControlMode = HeadControl::lookForward;
+			  Stand();
+		  }
+	  }
 }

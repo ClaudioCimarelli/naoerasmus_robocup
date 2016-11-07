@@ -3,7 +3,7 @@ option(PlayingState)
   initial_state(play)
   {
 	transition{
-		if(state_time > 10000)
+		if(state_time > 7000 && std::abs(libCodeRelease.angleToGoal) < 3_deg)
 				goto selectRole;
 	}
 	action
@@ -15,7 +15,7 @@ option(PlayingState)
   state(selectRole){
     action
     {
-     if(std::abs(libCodeRelease.distanceToOwnGoal) < 500.f)
+     if(std::abs(libCodeRelease.distanceToOwnGoal) < 300.f)
     	 PenaltyKeeper();
      else
     	 PenaltyKicker();

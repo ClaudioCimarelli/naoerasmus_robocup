@@ -56,19 +56,24 @@ option(PenaltyKicker)
   {
 	transition
 	{
-		if((state_time > 10 && action_done)){
-			theHeadControlMode = HeadControl::lookForward;
-			//Stand();
+		if(state_time > 3000 ||(state_time > 10 && action_done)){
+			goto wait;
 		}
 
 	}
 
     action
     {
-      Annotation("Alive and Kickin'");
       theHeadControlMode = HeadControl::lookForward;
       InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal, theBallModel.estimate.position.x() - 160.f, theBallModel.estimate.position.y() - 55.f));
     }
+  }
+
+  state(wait){
+	  action{
+		  theHeadControlMode = HeadControl::lookForward;
+		  Stand();
+ }
   }
 
   state(searchForBall)

@@ -10,6 +10,7 @@ transition playDead playDead start
 transition sitDown sitDown start
 transition stand stand start
 transition standHigh standHigh start
+transition fallLeft fallLeft start
 
 "This line must be the last one
 transition extern extern start
