@@ -19,4 +19,5 @@ public:
  
   float angleToGoal;
   float distanceToOwnGoal;
+  float shootAngle;
 };

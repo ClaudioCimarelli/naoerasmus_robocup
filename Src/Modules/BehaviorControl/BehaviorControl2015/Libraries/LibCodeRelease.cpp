@@ -11,8 +11,8 @@ namespace Behavior2015
   
   LibCodeRelease::LibCodeRelease():
     angleToGoal(0.f),
-  	distanceToOwnGoal(0.f)
-
+  	distanceToOwnGoal(0.f),
+  	shootAngle(5_deg)
   {}
   
   void LibCodeRelease::preProcess()

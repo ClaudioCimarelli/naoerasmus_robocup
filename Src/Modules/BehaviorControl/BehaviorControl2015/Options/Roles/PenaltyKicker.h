@@ -66,13 +66,14 @@ option(PenaltyKicker)
     {
       theHeadControlMode = HeadControl::lookForward;
       InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal, theBallModel.estimate.position.x() - 160.f, theBallModel.estimate.position.y() - 55.f));
+
     }
   }
 
   state(wait){
 	  action{
 		  theHeadControlMode = HeadControl::lookForward;
-		  Stand();
+
  }
   }
 

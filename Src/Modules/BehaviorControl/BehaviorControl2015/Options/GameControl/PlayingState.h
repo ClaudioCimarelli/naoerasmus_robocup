@@ -3,7 +3,7 @@ option(PlayingState)
   initial_state(play)
   {
 	transition{
-		if(state_time > 7000 && std::abs(libCodeRelease.angleToGoal) < 3_deg)
+		if(state_time > 15000 && std::abs(libCodeRelease.angleToGoal) < 3_deg)
 				goto selectRole;
 	}
 	action
