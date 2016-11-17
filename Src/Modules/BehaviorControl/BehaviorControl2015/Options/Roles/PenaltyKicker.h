@@ -47,8 +47,9 @@ option(PenaltyKicker)
       }
       action
       {
+        libCodeRelease.preProcess();
         theHeadControlMode = HeadControl::lookForward;
-        WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(libCodeRelease.angleToGoal, theBallModel.estimate.position.x() - 150.f, theBallModel.estimate.position.y() - 30.f));
+        WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(libCodeRelease.shootAngle, theBallModel.estimate.position.x() - 150.f, theBallModel.estimate.position.y() - 30.f));
       }
     }
 
@@ -59,7 +60,6 @@ option(PenaltyKicker)
 		if(state_time > 3000 ||(state_time > 10 && action_done)){
 			goto wait;
 		}
-
 	}
 
     action
