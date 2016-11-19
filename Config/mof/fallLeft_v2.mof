@@ -1,0 +1,9 @@
+motion_id = fallLeft_v2
+"motion falling on the left side (field RHYP missing)
+
+label start
+
+"   HY     HP    LSP    LSR    LEY    LER  _LWY_  _LH_     RSP    RSR    REY    RER  _RWY_   _RH_   LHYP    LHR    LHP    LKP    LAP    LAR   RHYP    RHR    RHP    RKP    RAP    RAR Int  Dur
+   -20     25    -50     75    -15    -20     0      0      50    -21    0.2     15     0      0      0       0    -70    121    -45     40     0      10    -40     80    -40     40      200
+
+transition allMotions extern start
