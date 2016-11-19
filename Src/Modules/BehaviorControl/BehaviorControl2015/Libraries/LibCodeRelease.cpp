@@ -12,6 +12,7 @@ namespace Behavior2015
   #include "LibCodeRelease.h"
   
   LibCodeRelease::LibCodeRelease():
+	shootDetected(false),
     angleToGoal(0.f),
   	distanceToOwnGoal(0.f),
   	shootAngle(0_deg),
@@ -34,6 +35,8 @@ namespace Behavior2015
     } else {
         shootAngle = angleToGoal;
     }
+
+    shootDetected = theBallModel.estimate.velocity.norm() != 0;
   }
 
   void LibCodeRelease::postProcess()

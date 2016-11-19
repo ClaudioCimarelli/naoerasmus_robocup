@@ -16,13 +16,12 @@ option(PenaltyKeeper) {
 	state(detectShot){
 		transition
 			{
-			  if(state_time>1000)
+			  if(libCodeRelease.shootDetected)
 				goto saveShot;
 			}
 			action
 			{
 			  theHeadControlMode = HeadControl::lookForward;
-			  libCodeRelease.shootAngle = 2_deg;
 			  //TODO:detect ball movement
 			  //save direction and send to saveshot
 			}
