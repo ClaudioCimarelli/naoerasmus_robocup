@@ -14,17 +14,18 @@ option(PenaltyKicker)
       Stand();
     }
   }
-
-
-
   state(walkToBall)
     {
       transition
       {
-        if(libCodeRelease.timeSinceBallWasSeen() > 7000)
-          goto searchForBall;
-        if(theBallModel.estimate.position.norm() < 320.f)
-          goto alignBehindBall;
+        if(theBallModel.estimate.position.norm() < 320.f){
+        	if (libCodeRelease.randomDirection < 0.5)
+        		goto alignBehindBallRight;
+		    else
+		    	goto alignBehindBallLeft;
+        }
+
+
       }
       action
       {
@@ -34,26 +35,24 @@ option(PenaltyKicker)
     }
 
 
-  state(alignBehindBall)
+  state(alignBehindBallLeft)
     {
       transition
       {
-        if(libCodeRelease.timeSinceBallWasSeen() > 7000)
-          goto searchForBall;
         if(libCodeRelease.between(theBallModel.estimate.position.y(), 20.f, 50.f)
             && libCodeRelease.between(theBallModel.estimate.position.x(), 140.f, 170.f)
-            && std::abs(libCodeRelease.angleToGoal) > 26_deg)
-          goto kick;
+            && std::abs(libCodeRelease.angleToGoal) > 23_deg)
+          goto kickLeft;
       }
       action
       {
         //libCodeRelease.preProcess();
         theHeadControlMode = HeadControl::lookForward;
-        WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(libCodeRelease.angleToGoal - 28_deg, theBallModel.estimate.position.x() - 150.f, theBallModel.estimate.position.y() - 30.f));
+        WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 150.f, theBallModel.estimate.position.y() - 30.f));
       }
     }
 
-  state(kick)
+  state(kickLeft)
   {
 	transition
 	{
@@ -66,10 +65,48 @@ option(PenaltyKicker)
     action
     {
       theHeadControlMode = HeadControl::lookForward;
-      InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal-28_deg, theBallModel.estimate.position.x() - 160.f, theBallModel.estimate.position.y() - 55.f));
+      InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 160.f, theBallModel.estimate.position.y() - 55.f));
 
     }
   }
+
+  state(alignBehindBallRight)
+      {
+        transition
+        {
+          if(libCodeRelease.between(theBallModel.estimate.position.y(), 20.f, 50.f)
+              && libCodeRelease.between(theBallModel.estimate.position.x(), 140.f, 170.f)
+              && std::abs(libCodeRelease.angleToGoal) > 23_deg)
+            goto kickRight;
+        }
+        action
+        {
+          //libCodeRelease.preProcess();
+          theHeadControlMode = HeadControl::lookForward;
+          //TODO parameter to kick better estimates
+          WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(libCodeRelease.angleToGoal + 25_deg, theBallModel.estimate.position.x() - 150.f, theBallModel.estimate.position.y() - 30.f));
+        }
+      }
+
+    state(kickRight)
+    {
+  	transition
+  	{
+  		if(state_time > 3000 ||(state_time > 10 && action_done)){
+  			Stand();
+  			goto wait;
+  		}
+  	}
+
+      action
+      {
+        theHeadControlMode = HeadControl::lookForward;
+        //TODO parameter to kick better estimates
+        InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal + 25_deg, theBallModel.estimate.position.x() - 160.f, theBallModel.estimate.position.y() - 55.f));
+
+      }
+    }
+
 
   state(wait){
 	  action{
@@ -77,34 +114,4 @@ option(PenaltyKicker)
 
 	  }
   }
-
-  state(searchForBall)
-  {
-    transition
-    {
-      if(libCodeRelease.timeSinceBallWasSeen() < 300)
-        goto turnToBall;
-    }
-    action
-    {
-      theHeadControlMode = HeadControl::lookForward;
-      WalkAtSpeedPercentage(Pose2f(1.f, 0.f, 0.f));
-    }
-  }
-
-  state(turnToBall)
-    {
-      transition
-      {
-        if(libCodeRelease.timeSinceBallWasSeen() > 7000)
-          goto searchForBall;
-        if(std::abs(theBallModel.estimate.position.angle()) < 5_deg)
-          goto walkToBall;
-      }
-      action
-      {
-        theHeadControlMode = HeadControl::lookForward;
-        WalkToTarget(Pose2f(50.f, 50.f, 50.f), Pose2f(theBallModel.estimate.position.angle(), 0.f, 0.f));
-      }
-    }
 }
