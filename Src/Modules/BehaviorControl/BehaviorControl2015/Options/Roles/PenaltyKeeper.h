@@ -31,17 +31,18 @@ option(PenaltyKeeper) {
 
 	state(saveShot){
 		transition{
-			if(state_time > 3000 || (state_time > 10 && action_done)){
+			if((state_time > 10000 && action_done)){
+				Stand();
 				goto wait;
 			}
 		}
 		action{
-		if(std::abs(libCodeRelease.shootAngle)<3_deg)
+		if(std::abs(libCodeRelease.detectedShootDirection)<3_deg)
 			SpecialAction(SpecialActionRequest::sitDown);
-		else if (libCodeRelease.shootAngle>=3_deg)
+		else if (libCodeRelease.detectedShootDirection>=3_deg)
 			SpecialAction(SpecialActionRequest::fallLeft);
 		else
-			SpecialAction(SpecialActionRequest::sitDown);
+			SpecialAction(SpecialActionRequest::diveLeft);
 
 		}
 	}

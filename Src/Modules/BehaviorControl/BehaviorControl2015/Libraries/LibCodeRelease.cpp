@@ -14,9 +14,11 @@ namespace Behavior2015
   LibCodeRelease::LibCodeRelease():
     angleToGoal(0.f),
   	distanceToOwnGoal(0.f),
-  	shootAngle(5_deg)
+  	shootAngle(0_deg),
+  	detectedShootDirection(-5_deg)
   { srand (static_cast <unsigned> (time(0))); }
   
+
   void LibCodeRelease::preProcess()
   {
     angleToGoal = (theRobotPose.inverse() * Vector2f(theFieldDimensions.xPosOpponentGroundline, 0.f)).angle();
