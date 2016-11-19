@@ -12,6 +12,7 @@ transition stand stand start
 transition standHigh standHigh start
 transition fallLeft fallLeft start
 transition diveLeft diveLeft start
+transition diveRight diveRight start
 
 "This line must be the last one
 transition extern extern start

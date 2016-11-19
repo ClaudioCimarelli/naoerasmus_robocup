@@ -30,7 +30,6 @@ option(PenaltyKeeper) {
 		transition{
 			if((state_time > 10000 && action_done)){
 				Stand();
-				goto wait;
 			}
 		}
 		action{
@@ -44,10 +43,4 @@ option(PenaltyKeeper) {
 		}
 	}
 
-	 state(wait){
-		  action{
-			  theHeadControlMode = HeadControl::lookForward;
-
-		  }
-	  }
 }
