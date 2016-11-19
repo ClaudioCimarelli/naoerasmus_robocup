@@ -22,8 +22,6 @@ option(PenaltyKeeper) {
 			action
 			{
 			  theHeadControlMode = HeadControl::lookForward;
-			  //TODO:detect ball movement
-			  //save direction and send to saveshot
 			}
 
 	}

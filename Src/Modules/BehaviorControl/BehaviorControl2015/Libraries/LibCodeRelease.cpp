@@ -16,7 +16,7 @@ namespace Behavior2015
     angleToGoal(0.f),
   	distanceToOwnGoal(0.f),
   	shootAngle(0_deg),
-  	detectedShootDirection(-5_deg)
+  	detectedShootDirection(0_deg)
   { srand (static_cast <unsigned> (time(0))); }
   
 
@@ -29,14 +29,17 @@ namespace Behavior2015
     // TODO: this should only apply for PenaltyKicker! need to add exception for other roles if possible
     float random_number = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
     if (random_number < 0.4) {
-        shootAngle = angleToGoal + 10_deg;
+        shootAngle = angleToGoal + 28_deg;
     } else if (random_number > 0.6) {
-        shootAngle = angleToGoal - 10_deg;
+        shootAngle = angleToGoal - 28_deg;
     } else {
         shootAngle = angleToGoal;
     }
 
     shootDetected = theBallModel.estimate.velocity.norm() != 0;
+    if(shootDetected){
+    	detectedShootDirection = theBallModel.estimate.velocity.angle();
+    }
   }
 
   void LibCodeRelease::postProcess()
