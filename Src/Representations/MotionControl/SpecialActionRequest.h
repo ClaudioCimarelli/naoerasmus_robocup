@@ -23,6 +23,7 @@ STREAMABLE(SpecialActionRequest,
     stand,
     standHigh,
 	fallLeft,
+	diveLeft,
   });
 
   /**
