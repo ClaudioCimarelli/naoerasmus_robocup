@@ -16,7 +16,8 @@ namespace Behavior2015
     angleToGoal(0.f),
   	distanceToOwnGoal(0.f),
   	shootAngle(0_deg),
-  	detectedShootDirection(0_deg)
+  	detectedShootDirection(0_deg),
+	randomDirection(0.f)
   { srand (static_cast <unsigned> (time(0))); }
   
 
@@ -27,14 +28,8 @@ namespace Behavior2015
     
     // randomly decide between shooting left, straight or right
     // TODO: this should only apply for PenaltyKicker! need to add exception for other roles if possible
-    float random_number = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-    if (random_number < 0.4) {
-        shootAngle = angleToGoal + 28_deg;
-    } else if (random_number > 0.6) {
-        shootAngle = angleToGoal - 28_deg;
-    } else {
-        shootAngle = angleToGoal;
-    }
+    randomDirection = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+
 
     shootDetected = theBallModel.estimate.velocity.norm() != 0;
     if(shootDetected){

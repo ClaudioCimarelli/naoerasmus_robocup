@@ -22,4 +22,5 @@ public:
   float distanceToOwnGoal;
   float shootAngle;
   float detectedShootDirection;
+  float randomDirection;
 };
