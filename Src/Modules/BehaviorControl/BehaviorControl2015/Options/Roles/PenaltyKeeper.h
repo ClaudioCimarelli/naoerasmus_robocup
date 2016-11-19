@@ -37,7 +37,7 @@ option(PenaltyKeeper) {
 		if(std::abs(libCodeRelease.detectedShootDirection)<3_deg)
 			SpecialAction(SpecialActionRequest::sitDown);
 		else if (libCodeRelease.detectedShootDirection>=3_deg)
-			SpecialAction(SpecialActionRequest::fallLeft);
+			SpecialAction(SpecialActionRequest::diveLeft);
 		else
 			SpecialAction(SpecialActionRequest::diveLeft);
 
