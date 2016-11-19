@@ -38,7 +38,7 @@ option(PenaltyKeeper) {
 		else if (libCodeRelease.detectedShootDirection>=3_deg)
 			SpecialAction(SpecialActionRequest::diveLeft);
 		else
-			SpecialAction(SpecialActionRequest::diveLeft);
+			SpecialAction(SpecialActionRequest::diveRight);
 
 		}
 	}
