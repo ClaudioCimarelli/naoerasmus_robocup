@@ -26,8 +26,6 @@ namespace Behavior2015
     angleToGoal = (theRobotPose.inverse() * Vector2f(theFieldDimensions.xPosOpponentGroundline, 0.f)).angle();
     distanceToOwnGoal = theRobotPose.translation.x() - theFieldDimensions.xPosOwnGroundline;
     
-    // randomly decide between shooting left, straight or right
-    // TODO: this should only apply for PenaltyKicker! need to add exception for other roles if possible
     randomDirection = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 
 
