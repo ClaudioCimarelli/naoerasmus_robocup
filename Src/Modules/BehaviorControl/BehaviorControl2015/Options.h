@@ -7,9 +7,11 @@
 #include "Options/GameControl/HandlePenaltyState.h"
 #include "Options/GameControl/PlayingState.h"
 #include "Options/GameControl/ReadyState.h"
+#include "Options/GameControl/BootstrapPose.h"
 
 #include "Options/HeadControl/HeadControl.h"
 #include "Options/HeadControl/LookForward.h"
+#include "Options/HeadControl/LookAround.h"
 
 #include "Options/Output/Annotation.h"
 
