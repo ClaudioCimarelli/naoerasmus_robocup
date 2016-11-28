@@ -10,7 +10,7 @@ option(LookAround, (float) (0.38f) tilt)
 	}
     action
     {
-      SetHeadPanTilt(1.40f, tilt, 90_deg);
+      SetHeadPanTilt(1.10f, tilt, 30_deg);
     }
   }
 
@@ -22,7 +22,7 @@ option(LookAround, (float) (0.38f) tilt)
   	}
       action
       {
-        SetHeadPanTilt(-1.40f, tilt, 90_deg);
+        SetHeadPanTilt(-1.10f, tilt, 30_deg);
       }
     }
 }

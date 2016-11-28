@@ -3,7 +3,7 @@ option(BootstrapPose)
   initial_state(setRequest)
   {
 	transition{
-		if(state_time > 200000 && std::abs(libCodeRelease.angleToGoal) < 2_deg)
+		if(state_time > 20000 && std::abs(libCodeRelease.angleToGoal) < 2_deg)
 				goto requestIsExecuted;
 	}
 	action

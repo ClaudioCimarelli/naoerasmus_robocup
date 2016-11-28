@@ -28,10 +28,11 @@ option(HandleGameState)
     {
       theHeadControlMode = HeadControl::none;
       SetHeadPanTilt(0.f, 0.f, 150_deg);
-      if(theGameInfo.secondaryState == STATE2_PENALTYSHOOT)
+      if(theGameInfo.secondaryState == STATE2_PENALTYSHOOT){
         PlaySound(theGameInfo.kickOffTeam == theOwnTeamInfo.teamNumber
                   ? "penaltyStriker.wav" : "penaltyKeeper.wav");
-
+        PlayingState();
+      }
       if(theGameInfo.secondaryState == STATE2_PENALTYSHOOT)
         Stand();
       else
