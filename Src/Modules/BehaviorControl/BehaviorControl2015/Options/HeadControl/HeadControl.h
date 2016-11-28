@@ -10,6 +10,7 @@ option(HeadControl)
       case HeadControl::off: goto off;
       case HeadControl::lookForward: goto lookForward;
       case HeadControl::lookAround: goto lookAround;
+      case HeadControl::lookAtBall: goto lookAtBall;
       default: goto none;
     }
   }
@@ -18,6 +19,7 @@ option(HeadControl)
   state(off) {action SetHeadPanTilt(JointAngles::off, JointAngles::off, 0.f);}
   state(lookForward) {action LookForward();}
   state(lookAround) {action LookAround();}
+  state(lookAtBall) {action LookAtBall();}
 }
 
 struct HeadControl
@@ -27,7 +29,8 @@ struct HeadControl
     none,
     off,
     lookForward,
-	lookAround,
+    lookAround,
+    lookAtBall,
   });
 };
 

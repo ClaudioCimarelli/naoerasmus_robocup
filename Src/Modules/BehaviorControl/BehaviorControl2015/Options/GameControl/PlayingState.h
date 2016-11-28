@@ -18,6 +18,7 @@ option(PlayingState)
 			}
 	     }
   }
+
   state(selectRole){
     action
     {
