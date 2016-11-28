@@ -11,7 +11,6 @@ option(PenaltyKicker)
     action
     {
       //theHeadControlMode = HeadControl::lookAround;
-      theHeadControlMode = HeadControl::lookAtBall;
       Stand();
     }
   }
@@ -30,9 +29,7 @@ option(PenaltyKicker)
       }
       action
       {
-        theHeadControlMode = HeadControl::lookAtBall;
         WalkToTarget(Pose2f(80.f, 80.f, 80.f), theBallModel.estimate.position);
-        theHeadControlMode = HeadControl::lookAtBall;
       }
     }
 
@@ -48,9 +45,7 @@ option(PenaltyKicker)
       }
       action
       {
-        theHeadControlMode = HeadControl::lookAtBall;
         WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 150.f, theBallModel.estimate.position.y() - 30.f));
-        theHeadControlMode = HeadControl::lookAtBall;
       }
     }
 
@@ -66,9 +61,7 @@ option(PenaltyKicker)
 
     action
     {
-      theHeadControlMode = HeadControl::lookAtBall;
       InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 160.f, theBallModel.estimate.position.y() - 55.f));
-
     }
   }
 
@@ -83,11 +76,8 @@ option(PenaltyKicker)
         }
         action
         {
-          //libCodeRelease.preProcess();
-          theHeadControlMode = HeadControl::lookAtBall;
           //TODO parameter to kick better estimates
           WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(libCodeRelease.angleToGoal + 26_deg, theBallModel.estimate.position.x() - 140.f, theBallModel.estimate.position.y() - 100.f));
-          theHeadControlMode = HeadControl::lookAtBall;
         }
       }
 
@@ -103,7 +93,6 @@ option(PenaltyKicker)
 
       action
       {
-        theHeadControlMode = HeadControl::lookAtBall;
         //TODO parameter to kick better estimates
         InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal + 28_deg, theBallModel.estimate.position.x() - 150.f, theBallModel.estimate.position.y() - 115.f));
 
