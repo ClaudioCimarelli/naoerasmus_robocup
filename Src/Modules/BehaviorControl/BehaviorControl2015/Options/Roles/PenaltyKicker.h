@@ -71,13 +71,13 @@ option(PenaltyKicker)
         {
           if(libCodeRelease.between(theBallModel.estimate.position.y(), 90.f, 110.f)
               && libCodeRelease.between(theBallModel.estimate.position.x(), 130.f, 150.f)
-              && std::abs(libCodeRelease.angleToGoal) > 25_deg)
+              && std::abs(libCodeRelease.angleToGoal) > 23_deg)
             goto kickLeft;
         }
         action
         {
           //TODO parameter to kick better estimates
-          WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(libCodeRelease.angleToGoal + 26_deg, theBallModel.estimate.position.x() - 140.f, theBallModel.estimate.position.y() - 100.f));
+          WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(libCodeRelease.angleToGoal + 25_deg, theBallModel.estimate.position.x() - 140.f, theBallModel.estimate.position.y() - 100.f));
         }
       }
 
@@ -94,7 +94,7 @@ option(PenaltyKicker)
       action
       {
         //TODO parameter to kick better estimates
-        InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal + 28_deg, theBallModel.estimate.position.x() - 150.f, theBallModel.estimate.position.y() - 115.f));
+        InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal + 25_deg, theBallModel.estimate.position.x() - 150.f, theBallModel.estimate.position.y() - 115.f));
 
       }
     }
