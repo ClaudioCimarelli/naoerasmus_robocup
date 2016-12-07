@@ -27,11 +27,6 @@ option(PenaltyKeeper) {
 			}
 			action
 			{
-			  /*if((state_time > 6700) && (theObstacleModel.obstacles[0].left.x() > 30.f)) Shot on the right
-								  WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(150.f,150.f)); Step left
-			  if((state_time > 6700) && (theObstacleModel.obstacles[0].right.x() < -30.f)) Shot on the left
-							     WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(-150.f,-150.f)); Step right*/
-
 			  theHeadControlMode = HeadControl::lookForward;
 			}
 
