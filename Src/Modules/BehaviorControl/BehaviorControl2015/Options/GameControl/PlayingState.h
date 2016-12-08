@@ -17,7 +17,7 @@ option(PlayingState)
   state(selectRole){
     action
     {
-     if(Global::getSettings().isGoalkeeper)
+     if(Global::getSettings().isGoalkeeper)//else if(theRobotInfo.number==3)
     	 PenaltyKeeper();
      else if(theGameInfo.kickOffTeam == theOwnTeamInfo.teamNumber){
     	 PenaltyKicker();
