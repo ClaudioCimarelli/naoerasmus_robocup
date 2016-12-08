@@ -6,6 +6,6 @@ network={
   ssid="NAME OF THE NETWORK"
   key_mgmt=NONE
   wep_tx_keyidx=0
-  wep_key0="THE PASSWORD"
+  wep_key0="PASSWORD"
 }
 

@@ -13,5 +13,5 @@ jc press 4 call Includes/Joystick
 
 
 #command to execute in penalty shoot state
-#set representation:GameInfo gameType = 0; state = 0; firstHalf = 1; kickOffTeam = 1; secondaryState = 1; dropInTeam = 0; dropInTime = 65535; secsRemaining = 600; timeLastPackageReceived = 49422;
+#set representation:GameInfo gameType = 0; state = 3; firstHalf = 1; kickOffTeam = 1; secondaryState = 1; dropInTeam = 0; dropInTime = 65535; secsRemaining = 600; timeLastPackageReceived = 49422;
 

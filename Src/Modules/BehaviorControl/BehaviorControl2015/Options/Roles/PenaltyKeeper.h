@@ -4,7 +4,7 @@ option(PenaltyKeeper) {
 		transition
 		    {
 		      if(state_time > 1000){
-		    	WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(250.f,0.f));
+		    	//WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(250.f,0.f));
 		        goto detectShot;
 		      }
 		    }

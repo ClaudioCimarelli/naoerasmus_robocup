@@ -9,7 +9,8 @@ option(LookAtBall, (float) (0.38f) tilt)
     action
     {
       const Vector3f ballPos(theBallModel.estimate.position.x(), theBallModel.estimate.position.y(), 0.0);
-      SetHeadTarget(ballPos);
+      SetHeadTargetOnGround(ballPos);
+      //TODO SetHeadPanTilt
     }
   }
 }
