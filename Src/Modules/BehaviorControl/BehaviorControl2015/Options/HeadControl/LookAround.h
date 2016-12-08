@@ -1,5 +1,5 @@
 /** Pun intended. Looks straight ahead in a way that the Nao V4's cameras cover the area in front of its feet as well as everything else in front of the robot.*/
-option(LookAround, (float) (0.38f) tilt)
+option(LookAround, (float) (0.20f) tilt)
 {
   /** Simply sets the necessary angles */
   initial_state(lookAroundLeft)
@@ -10,7 +10,7 @@ option(LookAround, (float) (0.38f) tilt)
 	}
     action
     {
-      SetHeadPanTilt(1.10f, tilt, 30_deg);
+      SetHeadPanTilt(0.9f, tilt, 20_deg);
     }
   }
 
@@ -22,7 +22,7 @@ option(LookAround, (float) (0.38f) tilt)
   	}
       action
       {
-        SetHeadPanTilt(-1.10f, tilt, 30_deg);
+        SetHeadPanTilt(-0.9f, tilt, 20_deg);
       }
     }
 }

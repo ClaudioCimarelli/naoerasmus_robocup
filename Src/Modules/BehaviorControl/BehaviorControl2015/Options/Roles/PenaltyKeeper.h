@@ -10,7 +10,7 @@ option(PenaltyKeeper) {
 		    }
 		    action
 		    {
-		      theHeadControlMode = HeadControl::lookForward;
+		      theHeadControlMode = HeadControl::lookAtBall;
 		      Stand();
 		    }
 	}
@@ -27,7 +27,7 @@ option(PenaltyKeeper) {
 			}
 			action
 			{
-			  theHeadControlMode = HeadControl::lookForward;
+			  theHeadControlMode = HeadControl::lookAtBall;
 			}
 
 	}
@@ -43,9 +43,9 @@ option(PenaltyKeeper) {
 			/*WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(-100.f,-100.f)); Step right*/
 			/*WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(100.f,100.f)); Step left*/
 
-		if(std::abs(libCodeRelease.detectedShootDirection)<3_deg)
+		if(std::abs(libCodeRelease.detectedShootDirection)<6_deg)
 			SpecialAction(SpecialActionRequest::diveCenter);
-		else if (libCodeRelease.detectedShootDirection>=3_deg)
+		else if (libCodeRelease.detectedShootDirection>=6_deg)
 			SpecialAction(SpecialActionRequest::diveLeft);
 		else
 			SpecialAction(SpecialActionRequest::diveRight);
