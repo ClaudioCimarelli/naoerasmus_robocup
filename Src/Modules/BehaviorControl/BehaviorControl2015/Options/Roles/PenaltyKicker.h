@@ -10,11 +10,8 @@ option(PenaltyKicker)
     }
     action
     {
-<<<<<<< HEAD
+
       theHeadControlMode = HeadControl::lookAround;
-=======
-      theHeadControlMode = HeadControl::lookAtBall;
->>>>>>> refs/remotes/origin/develop
       Stand();
     }
   }
@@ -26,7 +23,7 @@ option(PenaltyKicker)
         	if (libCodeRelease.randomDirection < 0.5)
         		goto alignBehindBallRight;
 		    else
-		    	goto alignBehindBallLeft;
+		    	goto alignBehindBallRight;
         }
 
 
@@ -44,13 +41,13 @@ option(PenaltyKicker)
       transition
       {
         if(libCodeRelease.between(theBallModel.estimate.position.y(), 20.f, 50.f)
-            && libCodeRelease.between(theBallModel.estimate.position.x(), 140.f, 170.f)
+            && libCodeRelease.between(theBallModel.estimate.position.x(), 160.f, 180.f)
             && std::abs(libCodeRelease.angleToGoal) > 23_deg)
           goto kickRight;
       }
       action
       {
-        WalkToTarget(Pose2f(30.f, 30.f, 30.f), Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 150.f, theBallModel.estimate.position.y() - 30.f));
+        WalkToTarget(Pose2f(30.f, 30.f, 30.f), Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 180.f, theBallModel.estimate.position.y() - 30.f));
       }
     }
 
@@ -75,18 +72,14 @@ option(PenaltyKicker)
         transition
         {
           if(libCodeRelease.between(theBallModel.estimate.position.y(), 70.f, 90.f)
-              && libCodeRelease.between(theBallModel.estimate.position.x(), 140.f, 160.f)
+              && libCodeRelease.between(theBallModel.estimate.position.x(), 160.f, 180.f)
               && std::abs(libCodeRelease.angleToGoal) > 23_deg)
             goto kickLeft;
         }
         action
         {
           //TODO parameter to kick better estimates
-<<<<<<< HEAD
-          WalkToTarget(Pose2f(30.f, 30.f, 30.f), Pose2f(libCodeRelease.angleToGoal + 25_deg, theBallModel.estimate.position.x() - 140.f, theBallModel.estimate.position.y() - 100.f));
-=======
-          WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(libCodeRelease.angleToGoal + 25_deg, theBallModel.estimate.position.x() - 150.f, theBallModel.estimate.position.y() - 80.f));
->>>>>>> refs/remotes/origin/develop
+          WalkToTarget(Pose2f(30.f, 30.f, 30.f), Pose2f(libCodeRelease.angleToGoal + 25_deg, theBallModel.estimate.position.x() - 170.f, theBallModel.estimate.position.y() - 100.f));
         }
       }
 
