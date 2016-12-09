@@ -31,7 +31,7 @@ namespace Behavior2015
 
     shootDetected = theBallModel.estimate.velocity.norm() != 0;
     if(shootDetected){
-    	detectedShootDirection = theBallModel.estimate.velocity.angle();
+    	detectedShootDirection = theBallModel.estimate.velocity.y();
     }
   }
 

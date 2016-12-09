@@ -48,9 +48,9 @@ option(PenaltyKeeper) {
 			/*WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(-100.f,-100.f)); Step right*/
 			/*WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(100.f,100.f)); Step left*/
 
-		if(std::abs(libCodeRelease.detectedShootDirection)<35_deg)
+		if(std::abs(libCodeRelease.detectedShootDirection)<300.f)
 			SpecialAction(SpecialActionRequest::diveCenter);
-		else if (libCodeRelease.detectedShootDirection>=35_deg)
+		else if (libCodeRelease.detectedShootDirection>=300.f)
 			SpecialAction(SpecialActionRequest::diveLeft);
 		else
 			SpecialAction(SpecialActionRequest::diveRight);
