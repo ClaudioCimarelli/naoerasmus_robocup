@@ -7,7 +7,7 @@ option(PenaltyKicker)
     {
     	if(libCodeRelease.timeSinceBallWasSeen() > 5000)
     	        goto searchForBall;
-      if(state_time > 5000)
+      if(state_time > 7000)
         goto walkToBall;
     }
     action
@@ -28,7 +28,7 @@ option(PenaltyKicker)
 		    	goto alignBehindBallRight;*/
                 goto searchForGoal;
         }
-        else if(state_time > 2500)
+        else if(state_time > 3200)
         	goto start;
       }
       action
