@@ -22,10 +22,11 @@ option(PenaltyKicker)
       transition
       {
         if(theBallModel.estimate.position.x() < 360.f){
-        	if (libCodeRelease.randomDirection < 0.5)
-        		goto alignBehindBallRight;
+        	/*if (libCodeRelease.randomDirection < 0.5)
+        		goto alignBehindBallLeft;
 		    else
-		    	goto alignBehindBallRight;
+		    	goto alignBehindBallRight;*/
+                goto searchForGoal;
         }
         else if(state_time > 2500)
         	goto start;
@@ -56,11 +57,10 @@ option(PenaltyKicker)
     		  Stand();
     	  }
     	  else{
-    		  theHeadControlMode = HeadControl::lookAtBall;
+    		  theHeadControlMode = HeadControl::lookForward;
     		  WalkToTarget(Pose2f(0.3f, 0.3f, 0.3f), Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 200.f, theBallModel.estimate.position.y() - 65.f));
 
     	  }
-
       }
     }
 
@@ -140,4 +140,18 @@ option(PenaltyKicker)
 
 	  }
   }
+  
+  state(searchForGoal)
+  {
+        transition
+        {
+          if(state_time > 7000)
+            goto alignBehindBallRight;
+        }
+        action
+        {
+          Stand();
+          theHeadControlMode = HeadControl::lookAround;
+        }
+   }
 }

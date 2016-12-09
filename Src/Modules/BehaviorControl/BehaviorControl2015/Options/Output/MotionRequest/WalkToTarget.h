@@ -20,7 +20,6 @@ option(WalkToTarget, (const Pose2f&) speed, (const Pose2f&) target)
       theMotionRequest.walkRequest.target = target;
       theMotionRequest.walkRequest.speed = speed;
       theMotionRequest.walkRequest.kickType = WalkRequest::none;
-      theHeadControlMode = HeadControl::lookAtBall;
     }
   }
 
@@ -39,7 +38,6 @@ option(WalkToTarget, (const Pose2f&) speed, (const Pose2f&) target)
       theMotionRequest.walkRequest.target = target;
       theMotionRequest.walkRequest.speed = speed;
       theMotionRequest.walkRequest.kickType = WalkRequest::none;
-      theHeadControlMode = HeadControl::lookAtBall;
     }
   }
 }
