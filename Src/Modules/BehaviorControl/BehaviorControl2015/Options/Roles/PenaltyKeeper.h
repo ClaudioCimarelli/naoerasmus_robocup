@@ -21,18 +21,22 @@ option(PenaltyKeeper) {
 	state(detectShot){
 		transition
 			{
-			if(libCodeRelease.timeSinceBallWasSeen() > 3000)
-						    	        goto searchForBall;
-//			  if((state_time > 6700) && (theObstacleModel.obstacles[0].center(1,0) > 3.000000)) /*Shot on the right*/
-//				  WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(150.f,150.f)); /*Step left*/
-//			  if((state_time > 6700) && (theObstacleModel.obstacles[0].center(1,0) < -3.600000)) /*Shot on the left*/
-//			     WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(-150.f,-150.f)); /*Step right*/
-			  if(libCodeRelease.shootDetected)
+//
+			if(libCodeRelease.shootDetected)
 				goto saveShot;
 			}
 			action
 			{
-			  theHeadControlMode = HeadControl::lookAtBall;
+				if(libCodeRelease.timeSinceBallWasSeen() > 300){
+					theHeadControlMode = HeadControl::lookAround;
+					LookAround(0.2f);
+				}
+				else
+					theHeadControlMode = HeadControl::lookAtBall;
+			 /* if((state_time > 6700) && (theObstacleModel.obstacles[0].center(1,0) > 3.000000)) Shot on the right
+			  				  WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(150.f,150.f)); Step left
+			  			  if((state_time > 6700) && (theObstacleModel.obstacles[0].center(1,0) < -3.600000)) Shot on the left
+			  			     WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(-150.f,-150.f)); Step right*/
 			}
 
 	}
