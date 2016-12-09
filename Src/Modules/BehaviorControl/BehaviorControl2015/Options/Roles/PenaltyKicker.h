@@ -68,11 +68,11 @@ option(PenaltyKicker)
   {
 	transition
 	{
-		if(state_time > 30000 ||(state_time > 500 && action_done)){
+		if(libCodeRelease.shootDetected){
 			Stand();
 			goto wait;
 		}
-        if(libCodeRelease.timeSinceBallWasSeen() > 3000)
+        if(libCodeRelease.timeSinceBallWasSeen() > 200)
             goto searchForBall;
 
 	}
@@ -123,7 +123,7 @@ option(PenaltyKicker)
       {
         transition
         {
-          if(libCodeRelease.timeSinceBallWasSeen() < 300)
+          if(libCodeRelease.timeSinceBallWasSeen() < 500)
             goto walkToBall;
         }
         action
