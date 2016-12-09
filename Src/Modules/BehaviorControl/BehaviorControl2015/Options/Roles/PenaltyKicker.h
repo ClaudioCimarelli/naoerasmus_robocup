@@ -7,7 +7,7 @@ option(PenaltyKicker)
     {
     	if(libCodeRelease.timeSinceBallWasSeen() > 5000)
     	        goto searchForBall;
-      if(state_time > 7000)
+      if(state_time > 8000)
         goto walkToBall;
     }
     action
@@ -57,7 +57,7 @@ option(PenaltyKicker)
     		  Stand();
     	  }
     	  else{
-    		  theHeadControlMode = HeadControl::lookForward;
+    		  theHeadControlMode = HeadControl::lookAtBall;
     		  WalkToTarget(Pose2f(0.3f, 0.3f, 0.3f), Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 200.f, theBallModel.estimate.position.y() - 65.f));
 
     	  }
@@ -81,7 +81,7 @@ option(PenaltyKicker)
     	    		  Stand();
     	}
     	else{
-    		//theHeadControlMode = HeadControl::lookAtBall;
+    		theHeadControlMode = HeadControl::lookAtBall;
     		InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 80.f, theBallModel.estimate.position.y() - 50.f));
 
 	  }
@@ -145,7 +145,7 @@ option(PenaltyKicker)
   {
         transition
         {
-          if(state_time > 7000)
+          if(state_time > 8000)
             goto alignBehindBallRight;
         }
         action

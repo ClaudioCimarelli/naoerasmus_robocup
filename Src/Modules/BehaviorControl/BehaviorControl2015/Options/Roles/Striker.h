@@ -76,7 +76,8 @@ option(Striker)
     }
     action
     {
-      theHeadControlMode = HeadControl::lookForward;
+      //theHeadControlMode = HeadControl::lookForward;
+        theHeadControlMode = HeadControl::lookAtBall;
       WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(libCodeRelease.angleToGoal, theBallModel.estimate.position.x() - 150.f, theBallModel.estimate.position.y() - 30.f));
     }
   }
