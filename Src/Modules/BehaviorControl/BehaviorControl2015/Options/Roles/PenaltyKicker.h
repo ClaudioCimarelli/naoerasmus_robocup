@@ -68,23 +68,21 @@ option(PenaltyKicker)
   {
 	transition
 	{
-		if(state_time > 30000 ||(state_time > 2000 && action_done)){
+		if(state_time > 30000 ||(state_time > 500 && action_done)){
 			Stand();
 			goto wait;
 		}
+        if(libCodeRelease.timeSinceBallWasSeen() > 3000)
+            goto searchForBall;
+
 	}
 
     action
     {
-    	if(libCodeRelease.timeSinceBallWasSeen() > 200){
-    	    		  theHeadControlMode = HeadControl::lookAround;
-    	    		  Stand();
-    	}
-    	else{
-    		theHeadControlMode = HeadControl::lookAtBall;
-    		InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 80.f, theBallModel.estimate.position.y() - 50.f));
+    	
+        theHeadControlMode = HeadControl::lookAtBall;
+        InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 70.f, theBallModel.estimate.position.y() - 45.f));
 
-	  }
     }
   }
 
