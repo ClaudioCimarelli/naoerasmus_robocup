@@ -76,13 +76,13 @@ option(PenaltyKicker)
 
     action
     {
-    	if(libCodeRelease.timeSinceBallWasSeen() > 500){
+    	if(libCodeRelease.timeSinceBallWasSeen() > 200){
     	    		  theHeadControlMode = HeadControl::lookAround;
     	    		  Stand();
     	}
     	else{
-    		theHeadControlMode = HeadControl::lookAtBall;
-    		InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 150.f, theBallModel.estimate.position.y() - 50.f));
+    		//theHeadControlMode = HeadControl::lookAtBall;
+    		InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 80.f, theBallModel.estimate.position.y() - 50.f));
 
 	  }
     }
