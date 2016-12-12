@@ -82,7 +82,6 @@ option(PenaltyKicker)
     	
         theHeadControlMode = HeadControl::lookAtBall;
         //InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 100.f, theBallModel.estimate.position.y() - 145.f));
-
         InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 60.f, theBallModel.estimate.position.y() - 75.f));
 
     }
