@@ -3,9 +3,9 @@ option(PenaltyKeeper) {
 	initial_state(start) {
 		transition
 		    {
-			if(libCodeRelease.timeSinceBallWasSeen() > 3000)
+			if(libCodeRelease.timeSinceBallWasSeen() > 1000)
 			    	        goto searchForBall;
-		      if(state_time > 3000 && action_done){
+		      if(state_time > 1000 && action_done){
 		    	  theHeadControlMode = HeadControl::lookAtBall;
 		    	  Stand();
 		    	  goto detectShot;
@@ -13,7 +13,7 @@ option(PenaltyKeeper) {
 		    }
 		    action
 		    {
-		    	WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(650.f,0.f));
+		    	WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(550.f,0.f));
 		    	theHeadControlMode = HeadControl::lookAround;
 		    }
 	}
@@ -52,9 +52,9 @@ option(PenaltyKeeper) {
 			/*WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(-100.f,-100.f)); Step right*/
 			/*WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(100.f,100.f)); Step left*/
 
-		if(std::abs(libCodeRelease.detectedShootDirection)<350.f)
+		if(std::abs(libCodeRelease.detectedShootDirection)<280.f)
 			SpecialAction(SpecialActionRequest::diveCenter);
-		else if (libCodeRelease.detectedShootDirection>=350.f)
+		else if (libCodeRelease.detectedShootDirection>=280.f)
 			SpecialAction(SpecialActionRequest::diveLeft);
 		else
 			SpecialAction(SpecialActionRequest::diveRight);

@@ -7,7 +7,7 @@ option(PenaltyKicker)
     {
     	if(libCodeRelease.timeSinceBallWasSeen() > 5000)
     	        goto searchForBall;
-      if(state_time > 2000)
+    	if(state_time > 2000)
         goto walkToBall;
     }
     action
@@ -26,7 +26,7 @@ option(PenaltyKicker)
         		goto alignBehindBallLeft;
 		    else
 		    	goto alignBehindBallRight;*/
-                goto searchForGoal;
+        	goto alignBehindBallLeft;
         }
         else if(state_time > 3200)
         	goto start;
@@ -45,9 +45,9 @@ option(PenaltyKicker)
       {
     	  if(libCodeRelease.timeSinceBallWasSeen() > 5000)
     	          goto searchForBall;
-        if(libCodeRelease.between(theBallModel.estimate.position.y(), 50.f, 70.f)
-            && libCodeRelease.between(theBallModel.estimate.position.x(), 195.f, 210.f)
-            && std::abs(libCodeRelease.angleToGoal) > 23_deg)
+        if(libCodeRelease.between(theBallModel.estimate.position.y(), 55.f, 70.f)
+            && libCodeRelease.between(theBallModel.estimate.position.x(), 175.f, 190.f)
+            && std::abs(libCodeRelease.angleToGoal) > 24_deg)
           goto kickRight;
       }
       action
@@ -57,8 +57,8 @@ option(PenaltyKicker)
     		  Stand();
     	  }
     	  else{
-    		  theHeadControlMode = HeadControl::lookAtBall;
-    		  WalkToTarget(Pose2f(0.3f, 0.3f, 0.3f), Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 200.f, theBallModel.estimate.position.y() - 65.f));
+    		  theHeadControlMode = HeadControl::lookAround;
+    		  WalkToTarget(Pose2f(0.3f, 0.3f, 0.3f), Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 185.f, theBallModel.estimate.position.y() - 65.f));
 
     	  }
       }
@@ -80,7 +80,7 @@ option(PenaltyKicker)
     action
     {
     	
-        theHeadControlMode = HeadControl::lookAtBall;
+        theHeadControlMode = HeadControl::lookAround;
         //InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 100.f, theBallModel.estimate.position.y() - 145.f));
         InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 60.f, theBallModel.estimate.position.y() - 75.f));
 
@@ -93,12 +93,12 @@ option(PenaltyKicker)
         {
           if(libCodeRelease.between(theBallModel.estimate.position.y(), 30.f, 50.f)
               && libCodeRelease.between(theBallModel.estimate.position.x(), 180.f, 200.f)
-              && std::abs(libCodeRelease.angleToGoal) > 23_deg)
+              && std::abs(libCodeRelease.angleToGoal) > 20_deg)
             goto kickLeft;
         }
         action
         {
-          WalkToTarget(Pose2f(30.f, 30.f, 30.f), Pose2f(libCodeRelease.angleToGoal + 25_deg, theBallModel.estimate.position.x() - 190.f, theBallModel.estimate.position.y() - 40.f));
+          WalkToTarget(Pose2f(0.3f, 0.3f, 0.3f), Pose2f(libCodeRelease.angleToGoal + 21_deg, theBallModel.estimate.position.x() - 190.f, theBallModel.estimate.position.y() - 40.f));
         }
       }
 
@@ -114,7 +114,7 @@ option(PenaltyKicker)
 
       action
       {
-        InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal + 25_deg, theBallModel.estimate.position.x() - 120.f, theBallModel.estimate.position.y() - 100.f));
+        InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal + 21_deg, theBallModel.estimate.position.x() - 60.f, theBallModel.estimate.position.y() - 80.f));
 
       }
     }

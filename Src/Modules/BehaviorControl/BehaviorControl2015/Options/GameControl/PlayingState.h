@@ -3,8 +3,8 @@ option(PlayingState)
   initial_state(play)
   {
 	transition{
-		if(state_time > 5000){
-				theHeadControlMode = HeadControl::lookForward;
+		if(state_time > 3000){
+				//theHeadControlMode = HeadControl::lookForward;
 				goto selectRole;
 		}
 	}
