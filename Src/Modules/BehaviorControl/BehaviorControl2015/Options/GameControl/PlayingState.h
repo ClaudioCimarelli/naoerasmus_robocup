@@ -3,7 +3,7 @@ option(PlayingState)
   initial_state(play)
   {
 	transition{
-		if(state_time > 3000){
+		if(state_time > 6000){
 				//theHeadControlMode = HeadControl::lookForward;
 				goto selectRole;
 		}
@@ -21,7 +21,6 @@ option(PlayingState)
     	 PenaltyKeeper();
      else if(theGameInfo.kickOffTeam == theOwnTeamInfo.teamNumber){
     	 PenaltyKicker();
-
      }
     }
   }

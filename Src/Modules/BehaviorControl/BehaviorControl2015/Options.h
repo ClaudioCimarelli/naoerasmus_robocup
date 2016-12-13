@@ -24,6 +24,7 @@
 
 #include "Options/Output/MotionRequest/GetUpEngine.h"
 #include "Options/Output/MotionRequest/InWalkKick.h"
+#include "Options/Output/MotionRequest/KickStraight.h"
 #include "Options/Output/MotionRequest/PathToTarget.h"
 #include "Options/Output/MotionRequest/SpecialAction.h"
 #include "Options/Output/MotionRequest/Stand.h"

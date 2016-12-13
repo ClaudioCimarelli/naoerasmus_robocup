@@ -3,8 +3,6 @@ option(PenaltyKeeper) {
 	initial_state(start) {
 		transition
 		    {
-			if(libCodeRelease.timeSinceBallWasSeen() > 1000)
-			    	        goto searchForBall;
 		      if(state_time > 1000 && action_done){
 		    	  theHeadControlMode = HeadControl::lookAtBall;
 		    	  Stand();
@@ -13,25 +11,23 @@ option(PenaltyKeeper) {
 		    }
 		    action
 		    {
-		    	WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(550.f,0.f));
+		    	WalkToTarget(Pose2f(40.f, 40.f, 40.f), Pose2f(700.f,0.f));
 		    	theHeadControlMode = HeadControl::lookAround;
 		    }
 	}
 
 	state(detectShot){
 		transition
-			{
-//
+			{//
 			if(libCodeRelease.shootDetected)
 				goto saveShot;
+
+			if(libCodeRelease.timeSinceBallWasSeen() > 1000)
+				goto searchForBall;
 			}
 			action
 			{
-				if(libCodeRelease.timeSinceBallWasSeen() > 300){
-					theHeadControlMode = HeadControl::lookAround;
-					//LookAround(0.2f);
-				}
-				else
+
 					theHeadControlMode = HeadControl::lookAtBall;
 			 /* if((state_time > 6700) && (theObstacleModel.obstacles[0].center(1,0) > 3.000000)) Shot on the right
 			  				  WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(150.f,150.f)); Step left
@@ -71,7 +67,8 @@ option(PenaltyKeeper) {
 	        }
 	        action
 	        {
-	          theHeadControlMode = HeadControl::lookAround;
+	          theHeadControlMode = HeadControl::none;
+	          LookAround(0.2f);
 	        }
 	      }
 

@@ -3,23 +3,20 @@
  * @param kickType The WalkRequest::KickType to be executed
  * @param kickPose The Pose to move to
  */
-option(InWalkKick, ((WalkRequest) KickType) kickType, (const Pose2f&) kickPose)
+option(KickStraight, ((WalkRequest) KickType) kickType, (const Pose2f&) kickPose)
 {
   /** Set the motion request / kickType. */
   initial_state(launch)
   {
     transition
     {
-      if(theMotionInfo.motion == MotionRequest::walk && theMotionInfo.walkRequest.kickType == kickType)
+      if(theMotionInfo.motion == MotionRequest::kick) //&& theMotionRequest.kickrequest.kickMotionType = KickRequest::kickForward)
         goto execute;
     }
     action
     {
-      theMotionRequest.motion = MotionRequest::walk;
-      theMotionRequest.walkRequest.mode = WalkRequest::targetMode;
-      theMotionRequest.walkRequest.target = kickPose;
-      theMotionRequest.walkRequest.speed = Pose2f(30.f, 30.f, 30.f);
-      theMotionRequest.walkRequest.kickType = kickType;
+      //theMotionRequest.motion = MotionRequest::kick;
+      //theMotionRequest.kickrequest.kickMotionType = KickRequest::kickForward;
     }
   }
 
