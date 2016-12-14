@@ -7,7 +7,9 @@ stiffness 30  30  *  *  *  *  0  0  0   0  0   0  0  0  100  100   100   100   1
 "   HY     HP    LSP    LSR    LEY    LER  _LWY_  _LH_     RSP    RSR    REY    RER  _RWY_   _RH_   LHYP    LHR    LHP    LKP    LAP    LAR   RHYP    RHR    RHP    RKP    RAP    RAR Int  Dur
    -20     25    -100     70    -15    -20     0      0      0 	    0	 0.2     15     0      0      0       0    -70    121    -45     40     0      10    -40     80    -40     40   1  200
    -20     25    -100     40    -15    -20     0      0      0      0      0      0     0      0    -13     -19    -90    121    -68      5     13       1    -20     47    -22     25   1  400
+label repeat
    -20     25    -100     20    -15    -20     0      0      0      0      0      0     0      0    -13     -19    -90    121    -68      5     40       1    -20     47    -22     25   0  10000
 
+transition  diveLeft diveLeft repeat
 
 transition allMotions extern start

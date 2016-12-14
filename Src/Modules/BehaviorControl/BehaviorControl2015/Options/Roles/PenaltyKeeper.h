@@ -3,7 +3,7 @@ option(PenaltyKeeper) {
 	initial_state(start) {
 		transition
 		    {
-		      if(state_time > 1000 && action_done){
+		      if(state_time > 3000){
 		    	  theHeadControlMode = HeadControl::lookAtBall;
 		    	  Stand();
 		    	  goto detectShot;
@@ -11,8 +11,8 @@ option(PenaltyKeeper) {
 		    }
 		    action
 		    {
-		    	WalkToTarget(Pose2f(40.f, 40.f, 40.f), Pose2f(700.f,0.f));
-		    	theHeadControlMode = HeadControl::lookAround;
+		    	WalkToTarget(Pose2f(50.f, 50.f, 50.f), Pose2f(380.f,0.f));
+		    	//theHeadControlMode = HeadControl::lookAround;
 		    }
 	}
 
