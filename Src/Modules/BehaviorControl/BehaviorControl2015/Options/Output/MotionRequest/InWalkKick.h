@@ -18,7 +18,7 @@ option(InWalkKick, ((WalkRequest) KickType) kickType, (const Pose2f&) kickPose)
       theMotionRequest.motion = MotionRequest::walk;
       theMotionRequest.walkRequest.mode = WalkRequest::targetMode;
       theMotionRequest.walkRequest.target = kickPose;
-      theMotionRequest.walkRequest.speed = Pose2f(30.f, 30.f, 30.f);
+      theMotionRequest.walkRequest.speed = Pose2f(10.f, 10.f, 10.f);
       theMotionRequest.walkRequest.kickType = kickType;
     }
   }
@@ -36,7 +36,7 @@ option(InWalkKick, ((WalkRequest) KickType) kickType, (const Pose2f&) kickPose)
       theMotionRequest.motion = MotionRequest::walk;
       theMotionRequest.walkRequest.mode = WalkRequest::targetMode;
       theMotionRequest.walkRequest.target = kickPose;
-      theMotionRequest.walkRequest.speed = Pose2f(1.f, 1.f, 1.f);
+      theMotionRequest.walkRequest.speed = Pose2f(10.f, 10.f, 10.f);
       theMotionRequest.walkRequest.kickType = WalkRequest::none;
     }
   }
@@ -49,7 +49,7 @@ option(InWalkKick, ((WalkRequest) KickType) kickType, (const Pose2f&) kickPose)
       theMotionRequest.motion = MotionRequest::walk;
       theMotionRequest.walkRequest.mode = WalkRequest::targetMode;
       theMotionRequest.walkRequest.target = kickPose;
-      theMotionRequest.walkRequest.speed = Pose2f(1.f, 1.f, 1.f);
+      theMotionRequest.walkRequest.speed = Pose2f(10.f, 10.f, 10.f);
       theMotionRequest.walkRequest.kickType = WalkRequest::none;
     }
   }
