@@ -22,10 +22,10 @@ option(PenaltyKicker)
       transition
       {
         if(theBallModel.estimate.position.x() < 360.f){
-        	if (libCodeRelease.randomDirection < 0.5)
+        	if (libCodeRelease.randomDirection < 0.001)
         		goto alignBehindBallRight;
 		    else
-		    	goto alignBehindBallRight;
+		    	goto alignBehindBallLeft;
         }
         else if(state_time > 3200)
         	goto start;
@@ -90,30 +90,41 @@ option(PenaltyKicker)
       {
         transition
         {
-          if(libCodeRelease.between(theBallModel.estimate.position.y(), 80.f, 100.f)
-              && libCodeRelease.between(theBallModel.estimate.position.x(), 180.f, 200.f)
-              && std::abs(libCodeRelease.angleToGoal) > 20_deg)
+          if(libCodeRelease.between(theBallModel.estimate.position.y(), 42.f, 62.f)
+              && libCodeRelease.between(theBallModel.estimate.position.x(), 165.f, 180.f)
+              && std::abs(libCodeRelease.angleToGoal) > 25_deg)
             goto kickLeft;
         }
         action
         {
-          WalkToTarget(Pose2f(0.3f, 0.3f, 0.3f), Pose2f(libCodeRelease.angleToGoal + 21_deg, theBallModel.estimate.position.x() - 190.f, theBallModel.estimate.position.y() - 90.f));
+            if(libCodeRelease.timeSinceBallWasSeen() > 500){
+                theHeadControlMode = HeadControl::lookAround;
+                Stand();
+            }
+            else {
+                theHeadControlMode = HeadControl::lookAtBall;
+                WalkToTarget(Pose2f(0.3f, 0.3f, 0.3f), Pose2f(libCodeRelease.angleToGoal + 26_deg, theBallModel.estimate.position.x() - 175.f, theBallModel.estimate.position.y() - 177.f));
+            }
         }
       }
 
     state(kickLeft)
     {
-  	transition
-  	{
-  		if(state_time > 3000 ||(state_time > 10 && action_done)){
-  			Stand();
-  			goto wait;
-  		}
-  	}
+        transition
+        {
+            if(libCodeRelease.shootDetected){
+                Stand();
+                goto wait;
+            }
+            if(libCodeRelease.timeSinceBallWasSeen() > 200)
+                goto searchForBall;
+            
+        }
 
       action
       {
-        InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal + 21_deg, theBallModel.estimate.position.x() - 55.f, theBallModel.estimate.position.y() - 70.f));
+        theHeadControlMode = HeadControl::lookAtBall;
+        InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal + 26_deg, theBallModel.estimate.position.x() - 45.f, theBallModel.estimate.position.y() + 55.f));
 
       }
     }
