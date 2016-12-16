@@ -39,7 +39,7 @@ option(PenaltyKeeper) {
 	state(saveShot){
 		transition{
 			if((state_time > 10000 && action_done)){
-				Stand();
+				//Stand();
 			}
 		}
 		action{
