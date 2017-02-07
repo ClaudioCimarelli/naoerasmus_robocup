@@ -17,8 +17,8 @@
         <Set name="NaoColor" value="blue"/>
       </Body>
       <Body ref="Nao" name="robot2">
-        <Translation x="-2.5" y="2" z="320mm"/>
-        <Rotation z="220degree"/>
+        <Translation x="-1.5" y="1.5" z="320mm"/>
+        <Rotation z="200degree"/>
         <Set name="NaoColor" value="blue"/>
       </Body>
     </Compound>

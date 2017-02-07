@@ -6,7 +6,7 @@ option(PenaltyKicker) {
     initial_state(start){
         transition {
 
-            if(state_time > 2000)
+            if(state_time > 5000)
                 goto turnToBall;
             if(libCodeRelease.timeSinceBallWasSeen() > 1800)
 				goto searchForBall;
@@ -23,7 +23,7 @@ option(PenaltyKicker) {
       {
         if (std::abs(theBallModel.estimate.position.angle()) < 5_deg) // If the ball is in front of the robot
           goto walkToBall; // Striker can walk to the ball
-        if (libCodeRelease.timeSinceBallWasSeen() > 900) // If the ball hasn't been seen for too long
+        if (libCodeRelease.timeSinceBallWasSeen() > 1200) // If the ball hasn't been seen for too long
 		  goto searchForBall; // Robot looks for the ball
       }
       action
@@ -39,7 +39,7 @@ option(PenaltyKicker) {
     state(walkToBall) {
         transition {
 
-            if(theBallModel.estimate.position.x() < 350.f){
+            if(theBallModel.estimate.position.x() < 400.f){
                 if (libCodeRelease.randomDirection < 0.5)
                     goto alignBehindBallRight;
                 else
@@ -50,12 +50,12 @@ option(PenaltyKicker) {
 				goto turnToBall;
 
 
-            if(libCodeRelease.timeSinceBallWasSeen() > 900)
+            if(libCodeRelease.timeSinceBallWasSeen() > 1200)
 				goto searchForBall;
         }
         action {
             //theHeadControlMode = HeadControl::lookAtBall;
-            WalkToTarget(Pose2f(0.f,20.f,20.f), Pose2f(0.f, theBallModel.estimate.position.x(), theBallModel.estimate.position.y()));
+            WalkToTarget(Pose2f(0.f,25.f,10.f), Pose2f(0.f, theBallModel.estimate.position.x(), theBallModel.estimate.position.y()));
         }
     }
 
@@ -80,17 +80,23 @@ option(PenaltyKicker) {
     state(kickRight) {
         transition {
 
-            if((theBallModel.estimate.position.x() > 500.f && (libCodeRelease.shootDetected)) || (state_time>4000))
+            if((theBallModel.estimate.position.x() > 450.f && (libCodeRelease.shootDetected)) || (state_time>4000))
                 goto wait;
-            if(libCodeRelease.between(theBallModel.estimate.position.x(), 170.f,500.f) && !(libCodeRelease.shootDetected)&& (state_time>1400))
-				goto walkToBall;
+
+            if(libCodeRelease.between(theBallModel.estimate.position.x(), 250.f,460.f) && !(libCodeRelease.shootDetected)&& (state_time>1000))
+            	goto alignBehindBallRight;
+
             if(libCodeRelease.timeSinceBallWasSeen() > 1200)
                 goto searchForBall;
         }
         action {
-            theHeadControlMode = HeadControl::lookAtBall;
-            //InWalkKick(WalkRequest::left, Pose2f(libCodeRelease.angleToGoal - 25_deg, theBallModel.estimate.position.x() - 100.f, theBallModel.estimate.position.y() - 145.f));
-            InWalkKick(WalkRequest::left, Pose2f(0.f, theBallModel.estimate.position.x() + 155.f, theBallModel.estimate.position.y() - 50.f));
+        	 if(theBallModel.estimate.position.x() < 280.f && (state_time>900)){
+				WalkToTarget(Pose2f(0.f, 1.f, 0.f), Pose2f(0.f, theBallModel.estimate.position.x() - 270.f,0.f));
+			}
+        	 else{
+				theHeadControlMode = HeadControl::lookAtBall;
+				InWalkKick(WalkRequest::left, Pose2f(0.f, theBallModel.estimate.position.x() + 155.f, theBallModel.estimate.position.y() - 52.f));
+			 }
         }
     }
 
@@ -135,10 +141,10 @@ option(PenaltyKicker) {
                 goto turnToBall;
         }
         action {
-        	if(state_time > 5000)
+        	if(state_time > 6000)
         		WalkAtSpeedPercentage(Pose2f(0.3f, 0.f, 0.f));
             theHeadControlMode = HeadControl::none;
-            LookAround(0.1f);
+            LookAround(0.1f, 0.7f);
         }
     }
 
@@ -149,8 +155,11 @@ option(PenaltyKicker) {
                 goto searchForBall;
         }
         action {
-        	Stand();
             theHeadControlMode = HeadControl::lookAtBall;
+            if(state_time < 4000)
+            	WalkToTarget(Pose2f(0.f, 30.f, 0.f), Pose2f(0.f, -450.f,0.f));
+            else
+            	Stand();
         }
     }
     

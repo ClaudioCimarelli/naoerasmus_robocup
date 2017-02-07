@@ -5,24 +5,24 @@ option(LookAround, (float) (-0.1f) tilt, (float) (0.5f) pan)
   initial_state(lookAroundLeft)
   {
 	transition{
-		if(action_done && state_time>3000)
+		if(action_done && state_time>3200)
 			goto lookAroundRight;
 	}
     action
     {
-      SetHeadPanTilt(pan, tilt, 35_deg);
+      SetHeadPanTilt(pan, tilt, 30_deg);
     }
   }
 
   state(lookAroundRight)
     {
   	transition{
-  		if(action_done && state_time>3000)
+  		if(action_done && state_time>3200)
   			goto lookAroundLeft;
   	}
       action
       {
-        SetHeadPanTilt(-pan, tilt, 35_deg);
+        SetHeadPanTilt(-pan, tilt, 30_deg);
       }
     }
 }
