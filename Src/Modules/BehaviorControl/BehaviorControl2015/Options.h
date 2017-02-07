@@ -37,6 +37,8 @@
 #include "Options/Roles/Striker.h"
 #include "Options/Roles/PenaltyKeeper.h"
 #include "Options/Roles/PenaltyKicker.h"
+#include "Options/Roles/KickerSupport.h"
+
 #include "Options/Skills/ArmContact.h"
 #include "Options/Skills/GetUp.h"
 

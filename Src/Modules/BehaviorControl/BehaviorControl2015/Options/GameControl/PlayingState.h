@@ -3,7 +3,7 @@ option(PlayingState)
   initial_state(play)
   {
 	transition{
-		if(state_time > 6000){
+		if(state_time > 1000){
 				//theHeadControlMode = HeadControl::lookForward;
 				goto selectRole;
 		}
@@ -17,11 +17,14 @@ option(PlayingState)
   state(selectRole){
     action
     {
-     if(Global::getSettings().isGoalkeeper)//else if(theRobotInfo.number==3)
-    	 PenaltyKeeper();
-     else if(theGameInfo.kickOffTeam == theOwnTeamInfo.teamNumber){
+	 if((theRobotInfo.number==2) ){
+				KickerSupport();
+			 }
+     else if((theRobotInfo.number==3) || theGameInfo.kickOffTeam == theOwnTeamInfo.teamNumber){
     	 PenaltyKicker();
      }
+     else if(theRobotInfo.number==1 || (Global::getSettings().isGoalkeeper))
+    	 PenaltyKeeper();
     }
   }
 }

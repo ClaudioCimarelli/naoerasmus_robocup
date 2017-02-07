@@ -3,14 +3,14 @@ option(PenaltyKeeper) {
 	initial_state(start) {
 		transition
 		    {
-		      if(state_time > 3000){
+		      if(state_time > 15000){
 		    	  Stand();
 		    	  goto detectShot;
 		      }
 		    }
 		    action
 		    {
-		    	WalkToTarget(Pose2f(30.f, 30.f, 30.f), Pose2f(380.f,0.f));
+		    	WalkToTarget(Pose2f(0.f, 30.f, 0.f), Pose2f(0.f, 450.f,0.f));
 		    	theHeadControlMode = HeadControl::lookAround;
 		    }
 	}
@@ -18,7 +18,7 @@ option(PenaltyKeeper) {
 	state(detectShot){
 		transition
 			{//
-			if(libCodeRelease.shootDetected)
+			if(libCodeRelease.shootDetected && (theBallModel.estimate.position.x() < 350.f))
 				goto saveShot;
 
 			if(libCodeRelease.timeSinceBallWasSeen() > 1500)
@@ -46,6 +46,7 @@ option(PenaltyKeeper) {
 		/*If I see the Robot step aside, I move in the other direction*/
 			/*WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(-100.f,-100.f)); Step right*/
 			/*WalkToTarget(Pose2f(80.f, 80.f, 80.f), Pose2f(100.f,100.f)); Step left*/
+/*
 
 		if(std::abs(libCodeRelease.detectedShootDirection)<260.f)
 			SpecialAction(SpecialActionRequest::diveCenter);
@@ -53,7 +54,8 @@ option(PenaltyKeeper) {
 			SpecialAction(SpecialActionRequest::diveLeft);
 		else
 			SpecialAction(SpecialActionRequest::diveRight);
-
+*/
+			SpecialAction(SpecialActionRequest::diveCenter);
 		}
 	}
 

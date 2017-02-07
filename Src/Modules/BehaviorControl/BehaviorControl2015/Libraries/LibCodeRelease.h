@@ -23,4 +23,6 @@ public:
   float shootAngle;
   float detectedShootDirection;
   float randomDirection;
+  unsigned shootTime;
+
 };

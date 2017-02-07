@@ -17,7 +17,8 @@ namespace Behavior2015
   	distanceToOwnGoal(0.f),
   	shootAngle(0_deg),
   	detectedShootDirection(0_deg),
-	randomDirection(0.f)
+	randomDirection(0.f),
+	shootTime(theFrameInfo.time - 2000)
   { srand (static_cast <unsigned> (time(0))); }
   
 
@@ -28,11 +29,19 @@ namespace Behavior2015
     
     randomDirection = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 
-
-    shootDetected = theBallModel.estimate.velocity.norm() != 0;
-    if(shootDetected){
-    	detectedShootDirection = theBallModel.estimate.velocity.y();
+    {
+    	bool shootDetectedTemp(false);
+    	shootDetectedTemp = theBallModel.estimate.velocity.norm() != 0;
+		if(shootDetectedTemp){
+			detectedShootDirection = theBallModel.estimate.velocity.y();
+			shootTime = theFrameInfo.time;
+		}
+		if(theFrameInfo.getTimeSince(shootTime)<1300 || shootDetectedTemp)
+			shootDetected = true;
+		else
+			shootDetected = false;
     }
+
   }
 
   void LibCodeRelease::postProcess()

@@ -10,13 +10,13 @@ option(KickStraight, ((WalkRequest) KickType) kickType, (const Pose2f&) kickPose
   {
     transition
     {
-      if(theMotionInfo.motion == MotionRequest::kick) //&& theMotionRequest.kickrequest.kickMotionType = KickRequest::kickForward)
+      if(theMotionInfo.motion == MotionRequest::kick)// && theMotionRequest.kickrequest.kickMotionType = KickRequest::kickForward)
         goto execute;
     }
     action
     {
       //theMotionRequest.motion = MotionRequest::kick;
-      //theMotionRequest.kickrequest.kickMotionType = KickRequest::kickForward;
+      //theMotionRequest.kickRequest.kickMotionType = KickRequest::kickForward;
     }
   }
 

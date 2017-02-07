@@ -1,0 +1,17 @@
+call Includes/Normal
+
+# all views are defined in another script
+call Includes/Views
+
+call Includes/DebugResponses
+
+# press any key to activate the joystick
+jc press 1 call Includes/Joystick
+jc press 2 call Includes/Joystick
+jc press 3 call Includes/Joystick
+jc press 4 call Includes/Joystick
+
+
+#command to execute in penalty shoot state
+#set representation:GameInfo gameType = 0; state = 3; firstHalf = 1; kickOffTeam = 1; secondaryState = 1; dropInTeam = 0; dropInTime = 65535; secsRemaining = 600;
+
