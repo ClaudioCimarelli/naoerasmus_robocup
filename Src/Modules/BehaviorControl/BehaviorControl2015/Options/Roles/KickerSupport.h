@@ -3,12 +3,12 @@ option(KickerSupport) {
     
     initial_state(start){
         transition {
-            if(libCodeRelease.timeSinceBallWasSeen() < 200 && state_time>10000)
+            if(libCodeRelease.timeSinceBallWasSeen() < 200 && state_time>7000)
                 goto turnToBall;
         }
         action {
         	//theHeadControlMode = HeadControl::lookForward;
-        	if(libCodeRelease.timeSinceBallWasSeen() < 900 && state_time>9000)
+        	if(libCodeRelease.timeSinceBallWasSeen() < 900 && state_time>5500)
         		LookAtBall();
         	else
         		LookAround(0.1f, 0.6f);
@@ -23,7 +23,7 @@ option(KickerSupport) {
       {
         if (std::abs(theBallModel.estimate.position.angle()) < 5_deg) // If the ball is in front of the robot
           goto walkToBall; // Striker can walk to the ball
-        if (libCodeRelease.timeSinceBallWasSeen() > 1200) // If the ball hasn't been seen for too long
+        if (libCodeRelease.timeSinceBallWasSeen() > 1500) // If the ball hasn't been seen for too long
 		  goto searchForBall; // Robot looks for the ball
       }
       action
@@ -38,11 +38,11 @@ option(KickerSupport) {
         
     state(walkToBall) {
         transition {
-        	if(theBallModel.estimate.position.x() < 700.f)
+        	if(theBallModel.estimate.position.x() < 500.f)
 				goto alignBehindBall;
         	 if (std::abs(theBallModel.estimate.position.angle()) > 5_deg)
 				goto turnToBall;
-        	if (libCodeRelease.timeSinceBallWasSeen() > 1200) // If the ball hasn't been seen for too long
+        	if (libCodeRelease.timeSinceBallWasSeen() > 1500) // If the ball hasn't been seen for too long
         		goto searchForBall; // Robot looks for the ball
         }
         action {
@@ -71,26 +71,29 @@ option(KickerSupport) {
 
     state(alignBehindBall) {
     		transition {
-    			if(std::abs(theBallModel.estimate.position.y()) > 180.f && std::abs(libCodeRelease.angleToGoal) < 30_deg)
+    			if(std::abs(theBallModel.estimate.position.y()) > 200.f && std::abs(libCodeRelease.angleToGoal) < 30_deg)
     				goto alignBehindGoal;
     			if(theBallModel.estimate.position.x() > 950.f){
     				goto walkToBall;
     			}
-    			if(libCodeRelease.timeSinceBallWasSeen() > 1200)
+    			if(libCodeRelease.timeSinceBallWasSeen() > 1500)
     				goto searchForBall;
     		}
     		action {
     			theHeadControlMode = HeadControl::lookAtBall;
     			//LookAround(0.1f, 0.6f);
-    			if(libCodeRelease.angleToGoal > 3_deg){
+    			if(theBallModel.estimate.position.x() < 170.f){
+    				WalkToTarget(Pose2f(0.f, 1.f, 0.f), Pose2f(0.f, theBallModel.estimate.position.x() - 230.f,0.f));
+    			}
+    			else if(libCodeRelease.angleToGoal > 3_deg){
 
-    				WalkToTarget( Pose2f(1.f, 0.f, 25.f), Pose2f(libCodeRelease.angleToGoal - 20_deg, 0.f, theBallModel.estimate.position.y() - 300.f));
+    				WalkToTarget( Pose2f(1.f, 0.f, 25.f), Pose2f(libCodeRelease.angleToGoal - 27_deg, 0.f, theBallModel.estimate.position.y() - 210.f));
 
     			}
 
     			else if(libCodeRelease.angleToGoal < -3_deg){
 
-    				WalkToTarget( Pose2f(1.f, 0.f, 25.f), Pose2f(libCodeRelease.angleToGoal + 20_deg, 0.f, theBallModel.estimate.position.y() + 300.f));
+    				WalkToTarget( Pose2f(1.f, 0.f, 25.f), Pose2f(libCodeRelease.angleToGoal + 27_deg, 0.f, theBallModel.estimate.position.y() + 210.f));
 
     			}
     		}
@@ -98,7 +101,7 @@ option(KickerSupport) {
 
     state(alignBehindGoal) {
 		transition {
-			if(std::abs(libCodeRelease.angleToGoal) < 20_deg)
+			if(std::abs(libCodeRelease.angleToGoal) < 17_deg)
 				goto alignBehindBallRight;
 			if(theBallModel.estimate.position.x() > 950.f){
 				goto walkToBall;
@@ -109,13 +112,13 @@ option(KickerSupport) {
 		action {
 			theHeadControlMode = HeadControl::lookAtBall;
 			//LookAround(0.1f, 0.6f);
-			if(libCodeRelease.angleToGoal > 5_deg){
+			if(libCodeRelease.angleToGoal > 10_deg){
 
 				WalkToTarget( Pose2f(10.f, 0.f, 0.f), Pose2f(libCodeRelease.angleToGoal - 15_deg, 0.f, 0.f));
 
 			}
 
-			else if(libCodeRelease.angleToGoal < -5_deg){
+			else if(libCodeRelease.angleToGoal < -10_deg){
 
 				WalkToTarget( Pose2f(10.f, 0.f, 0.f), Pose2f(libCodeRelease.angleToGoal + 15_deg, 0.f, 0.f));
 
@@ -134,9 +137,6 @@ option(KickerSupport) {
 
             }
             action {
-            	/*if (std::abs(theBallModel.estimate.position.angle()) > 10_deg)
-            		WalkToTarget(Pose2f(40.f, 0.f, 0.f), Pose2f(theBallModel.estimate.position.angle(), 0.f, 0.f));
-    			//theHeadControlMode = HeadControl::lookAtBall;*/
             	WalkToTarget(Pose2f(0.f, 10.f, 10.f), Pose2f(0.f, theBallModel.estimate.position.x() - 165.f, theBallModel.estimate.position.y() - 50.f));
                 }
         }
@@ -144,15 +144,15 @@ option(KickerSupport) {
         
     state(kickRight) {
         transition {
-        	if((theBallModel.estimate.position.x() > 600.f && (libCodeRelease.shootDetected)) || (state_time>4000))
+        	if((theBallModel.estimate.position.x() > 700.f && (libCodeRelease.shootDetected)) || (state_time>5000))
 				goto wait;
-			if(libCodeRelease.between(theBallModel.estimate.position.x(), 230.f,610.f) && (!(libCodeRelease.shootDetected) || (state_time>1500)))
+			if(libCodeRelease.between(theBallModel.estimate.position.x(), 130.f,710.f) && (!(libCodeRelease.shootDetected) && (state_time>1500)))
 				goto alignBehindBallRight;
 			if(libCodeRelease.timeSinceBallWasSeen() > 1200)
 				goto searchForBall;
         }
         action {
-        	if(theBallModel.estimate.position.x() < 250.f && (state_time>900)){
+        	if(theBallModel.estimate.position.x() < 250.f && (state_time>700)){
 				WalkToTarget(Pose2f(0.f, 1.f, 0.f), Pose2f(0.f, theBallModel.estimate.position.x() - 300.f,0.f));
 			}
 			 else{
@@ -179,13 +179,13 @@ option(KickerSupport) {
         
     state(wait) {
         transition {
-            if(libCodeRelease.timeSinceBallWasSeen() > 10000)
+            if(libCodeRelease.timeSinceBallWasSeen() > 3000)
                 goto searchForBall;
         }
         action {
         	theHeadControlMode = HeadControl::lookAtBall;
-			if(state_time < 4000)
-				WalkToTarget(Pose2f(0.f, 30.f, 0.f), Pose2f(0.f, -450.f,0.f));
+			if(state_time < 3500)
+				WalkToTarget(Pose2f(0.f, 30.f, 0.f), Pose2f(0.f, -350.f,0.f));
 			else
 				Stand();
         }
